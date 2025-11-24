@@ -1,6 +1,4 @@
-Coffee Shop OOP Domain Model
-
-This project models a Coffee Shop domain using Object-Oriented Programming (OOP) in Python.
+This project models a simple coffee shop using Object-Oriented Programming (OOP) principles.
 It includes three main classes:
 
 Customer
@@ -9,103 +7,121 @@ Coffee
 
 Order
 
-These classes demonstrate relationships, validation, class methods, and object interaction.
+The goal is to understand class relationships, single source of truth, and data modeling in Python.
 
-Project Structure
-coffee_shop/
-│── customer.py
-│── coffee.py
-│── order.py
-│── debug.py
-│── README.md
-└── tests/ (optional for bonus)
-     ├── test_customer.py
-     ├── test_coffee.py
-     └── test_order.py
+ Domain Model
+Customer 1 --- * Order * --- 1 Coffee
 
-Domain Overview
+Entities & Relationships
+
+A Customer can have many Orders.
+
+A Coffee type can appear in many Orders.
+
+An Order belongs to one Customer and one Coffee.
+
+Single Source of Truth
+
+The Order class keeps a class-level list (Order.all) of all Order instances.
+This ensures all objects derive their relationships from one shared source.
+
+Class Responsibilities
 Customer
 
-Has a name (1–15 characters)
+Represents a customer in the coffee shop.
 
-Can place many orders
+Attributes
 
-Can order many different coffees (many-to-many through Order)
+name
 
-Methods:
+Key Methods
 
-orders()
+orders() → List of orders made by this customer
 
-coffees()
+coffees() → Unique coffees the customer has ordered
 
-create_order(coffee, price)
-
-most_aficionado(coffee) (class method)
+create_order(coffee, price) → Creates & stores a new order
 
 Coffee
 
-Has a name (3+ characters)
+Represents a coffee type.
 
-Can have many orders
+Attributes
 
-Methods:
+name
 
-orders()
+Key Methods
 
-customers()
+orders() → All orders for this coffee
 
-num_orders()
+customers() → All customers who ordered this coffee
 
-average_price()
+num_orders() → Count of orders for this coffee
+
+average_price() → Average amount customers pay
+
+most_aficionado() → Customer who spent the most on this coffee
 
 Order
 
-Connects a Customer and a Coffee
+Represents a purchase of a coffee by a customer.
 
-Has a price (1.0–10.0)
+Attributes
 
-Belongs to one customer and one coffee
+customer
 
-Stored in a global _all list
+coffee
 
-How to Run the Project
+price
 
-Create and activate a virtual environment:
+Class Attribute (Single Source of Truth)
 
-pipenv install
-pipenv shell
+Order.all = []
 
+▶ Running the Project (Debug Mode)
 
-Run the debug script:
+A debug.py file is included so you can manually test the relationships.
+
+Run:
 
 python3 debug.py
 
 
-This prints example customers, coffees, orders, and method outputs.
+Expected output includes:
+
+All orders
+
+Coffee stats
+
+Customer purchase info
+
+Most aficionado customer
 
 
-If you added the optional tests:
+ Project Structure
+coffee_shop/
+│
+├── customer.py
+├── coffee.py
+├── order.py
+│
+├── debug.py
+├── README.md
+│
+└── tests/
+    ├── test_customer.py
+    ├── test_coffee.py
+    └── test_order.py
 
-Install pytest:
+ What I Learned
 
-pipenv install pytest
+✔ How to design a domain model
+✔ Class relationships in OOP
+✔ How to maintain a single source of truth
+✔ Writing methods that compute values dynamically
 
 
-Run tests:
+Author
 
-pytest
-
-🗂 Features Demonstrated
-
-✔ Object-Oriented Programming
-✔ Relationships (one-to-many, many-to-many)
-✔ Data validation
-✔ Class methods
-✔ Aggregate methods
-✔ Clean architecture
-✔ Debugging script
-✔ Optional testing
-
-👤 Author
-
-Created by Luckyann Kagendo as part of the Moringa School Phase 3 Python Assessment.
+Luckyann Kagendo — Moringa School Phase 3
+Python | OOP | Software Development
